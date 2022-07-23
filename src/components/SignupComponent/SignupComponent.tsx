@@ -30,7 +30,7 @@ function SignupComponent() {
     AuthenticationService.signUp({ email, password })
       .then(() => {
         AuthenticationService.login(email, password).then(res => {
-          AuthenticationService.registerSuccessfulLogin(email, res.headers['Authorization']);
+          AuthenticationService.registerSuccessfulLogin(email, res.headers['authorization']);
           navigate(`/`);
         }).catch(err => console.error('Error during Log in', err));
       }).catch(err => console.error('Error during User creation', err));
