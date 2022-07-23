@@ -3,10 +3,10 @@ import classes from './SignupComponent.module.css';
 import { Button, Form } from 'react-bootstrap';
 import ErrorContainer from '../ErrorContainer/ErrorContainer';
 import AuthenticationService from '../../services/AuthenticationService';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function SignupComponent() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const emailInputRef = useRef<HTMLInputElement>(null);
   const passwordInputRef = useRef<HTMLInputElement>(null);
   const repeatPasswordInputRef = useRef<HTMLInputElement>(null);
@@ -27,7 +27,7 @@ function SignupComponent() {
   };
 
   function createUserAndLogIn(email: string, password: string) {
-    AuthenticationService.signUp({email, password})
+    AuthenticationService.signUp({ email, password })
       .then(() => {
         AuthenticationService.login(email, password).then(res => {
           AuthenticationService.registerSuccessfulLogin(email, res.headers['Authorization']);
@@ -40,7 +40,7 @@ function SignupComponent() {
   return (
     <Form className={classes.signupForm} onSubmit={handleSubmit}>
 
-      <Form.Group className="mb-4 mt-3" controlId="formEmail">
+      <Form.Group className="mb-3 mt-3" controlId="formEmail">
         <Form.Label>Username: </Form.Label>
         <Form.Control
           type="email"
@@ -54,7 +54,7 @@ function SignupComponent() {
         </Form.Control.Feedback>
       </Form.Group>
 
-      <Form.Group className="mb-4" controlId="formPassword">
+      <Form.Group className="mb-3" controlId="formPassword">
         <Form.Label>Password: </Form.Label>
         <Form.Control
           type="password"
@@ -67,7 +67,7 @@ function SignupComponent() {
         </Form.Control.Feedback>
       </Form.Group>
 
-      <Form.Group className="mb-4" controlId="formRepeatPassword">
+      <Form.Group className="mb-3" controlId="formRepeatPassword">
         <Form.Label>Repeat password: </Form.Label>
         <Form.Control
           type="password"
@@ -78,6 +78,7 @@ function SignupComponent() {
         <Form.Control.Feedback type="invalid">
           Please insert a valid password.
         </Form.Control.Feedback>
+        <ErrorContainer showError={passwordsNotMatch} message="Passwords not match" />
       </Form.Group>
 
       <div className={classes.center}>
@@ -87,6 +88,9 @@ function SignupComponent() {
       </div>
 
       <ErrorContainer showError={passwordsNotMatch} message=""/>
+      <div className="mt-3 mb-3">
+        Login <Link to={'/login'}>here</Link> !
+      </div>
     </Form>
   );
 }

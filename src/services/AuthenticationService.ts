@@ -54,6 +54,10 @@ class AuthenticationService {
     });
   }
 
+  deleteTokens() {
+    localStorage.clear();
+  }
+
 }
 
 export default new AuthenticationService();

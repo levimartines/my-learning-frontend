@@ -21,6 +21,7 @@ function LoginComponent() {
       AuthenticationService.registerSuccessfulLogin(email, token);
       navigate(`/dashboard`);
     }).catch(err => {
+      AuthenticationService.deleteTokens();
       console.error('Error during Log in', err);
       setHasLoginFailed(true);
     });
