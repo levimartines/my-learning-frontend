@@ -17,7 +17,8 @@ function LoginComponent() {
     const email = emailInputRef.current!.value;
     const password = passwordInputRef.current!.value;
     AuthenticationService.login(email, password).then(res => {
-      AuthenticationService.registerSuccessfulLogin(email, res.headers['Authorization']);
+      const token = res.headers.authorization;
+      AuthenticationService.registerSuccessfulLogin(email, token);
       navigate(`/dashboard`);
     }).catch(err => {
       console.error('Error during Log in', err);
@@ -29,7 +30,7 @@ function LoginComponent() {
     <div className={classes.loginForm}>
       <Form onSubmit={handleSubmit}>
         <Form.Group className="mb-4 mt-3" controlId="formEmail">
-          <Form.Label htmlFor="username">Email: </Form.Label>
+          <Form.Label>Email: </Form.Label>
           <Form.Control
             type="email"
             name="email"
@@ -43,7 +44,7 @@ function LoginComponent() {
         </Form.Group>
 
         <Form.Group className="mb-4" controlId="formPassword">
-          <Form.Label htmlFor="password">Password: </Form.Label>
+          <Form.Label>Password: </Form.Label>
           <Form.Control
             type="password"
             name="password"

@@ -41,7 +41,7 @@ function SignupComponent() {
     <Form className={classes.signupForm} onSubmit={handleSubmit}>
 
       <Form.Group className="mb-4 mt-3" controlId="formEmail">
-        <Form.Label htmlFor="username">Username: </Form.Label>
+        <Form.Label>Username: </Form.Label>
         <Form.Control
           type="email"
           name="email"
@@ -55,7 +55,7 @@ function SignupComponent() {
       </Form.Group>
 
       <Form.Group className="mb-4" controlId="formPassword">
-        <Form.Label htmlFor="password">Password: </Form.Label>
+        <Form.Label>Password: </Form.Label>
         <Form.Control
           type="password"
           name="password"
@@ -68,7 +68,7 @@ function SignupComponent() {
       </Form.Group>
 
       <Form.Group className="mb-4" controlId="formRepeatPassword">
-        <Form.Label htmlFor="repeatPassword">Repeat password: </Form.Label>
+        <Form.Label>Repeat password: </Form.Label>
         <Form.Control
           type="password"
           name="repeatPassword"

@@ -1,5 +1,5 @@
 import axios, { AxiosRequestConfig } from 'axios';
-import jwt_decode from "jwt-decode";
+import jwt_decode from 'jwt-decode';
 
 import { API_URL } from '../constants/env-constants';
 import { User } from '../models/user';
@@ -7,12 +7,21 @@ import { User } from '../models/user';
 export const LOGIN_SESSION = 'SESSION';
 export const TOKEN = 'token';
 
+interface IToken {
+  exp: number;
+  sub: string;
+}
+
 class AuthenticationService {
 
   registerSuccessfulLogin(email: string, token: string) {
-    localStorage.setItem(LOGIN_SESSION, email);
-    localStorage.setItem(TOKEN, token);
-    this.setupAxiosInterceptors();
+    if (email && token) {
+      localStorage.setItem(LOGIN_SESSION, email);
+      localStorage.setItem(TOKEN, token);
+      this.setupAxiosInterceptors();
+    } else {
+      throw new Error('Invalid email or token');
+    }
   }
 
   login(email: string, password: string) {
@@ -25,12 +34,14 @@ class AuthenticationService {
   }
 
   isUserLoggedIn() {
-    const token = localStorage.getItem(TOKEN);
-    if (token) {
-      const decoded = jwt_decode(token, { header: true})
-      console.log(decoded);
+    const bearerToken = localStorage.getItem(TOKEN);
+    if (bearerToken) {
+      const token = bearerToken.substring(7);
+      const decoded: IToken = jwt_decode(token);
+      const currentTimeInSeconds = new Date().getTime() / 1000;
+      return decoded.exp > currentTimeInSeconds;
     }
-    return token !== null;
+    return false;
   }
 
   setupAxiosInterceptors() {

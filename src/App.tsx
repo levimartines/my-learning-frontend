@@ -14,7 +14,7 @@ function App() {
 
       <BrowserRouter>
         <Routes>
-          <AuthenticatedRoute path="/" element={<DashboardComponent/>}/>
+          <Route path="/" element={<AuthenticatedRoute><DashboardComponent/></AuthenticatedRoute>}/>
           <Route path="login" element={<LoginComponent/>}/>
           <Route path="signup" element={<SignupComponent/>}/>
           <Route
