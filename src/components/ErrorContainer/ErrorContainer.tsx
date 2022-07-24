@@ -10,7 +10,7 @@ function ErrorContainer({ showError, message}: IProps) {
   return (
     showError ?
       <div className={classes.errorContainer}>
-        <p><strong>{message}</strong></p>
+        <strong>{message}</strong>
       </div>
       : <></>
   );

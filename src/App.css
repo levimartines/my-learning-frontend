@@ -8,3 +8,14 @@
   align-items: center;
   background-color: #282c34;
 }
+
+.base-component {
+  display: flex;
+  padding: 8px 100px 0 100px;
+  align-items: center;
+  flex-direction: column;
+  border: solid white 1px;
+  border-radius: 16px;
+  justify-content: start;
+}
+

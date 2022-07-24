@@ -1,9 +1,9 @@
 import { FormEvent, useRef, useState } from 'react';
-import AuthenticationService from '../../services/AuthenticationService';
-import { Link, useNavigate } from 'react-router-dom';
-import classes from './LoginComponent.module.css';
+import AuthenticationService from '../../../services/AuthenticationService';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
+import classes from '../AuthComponent.module.css';
 import { Button, Form } from 'react-bootstrap';
-import ErrorContainer from '../ErrorContainer/ErrorContainer';
+import ErrorContainer from '../../ErrorContainer/ErrorContainer';
 
 function LoginComponent() {
   const navigate = useNavigate();
@@ -27,10 +27,14 @@ function LoginComponent() {
     });
   };
 
+  if (AuthenticationService.isUserLoggedIn()) {
+    return <Navigate to="/" replace/>;
+  }
+
   return (
-    <div className={classes.loginForm}>
+    <div className='base-component'>
       <Form onSubmit={handleSubmit}>
-        <Form.Group className="mb-4 mt-3" controlId="formEmail">
+        <Form.Group className="mb-3 mt-3" controlId="formEmail">
           <Form.Label>Email: </Form.Label>
           <Form.Control
             type="email"
@@ -61,9 +65,9 @@ function LoginComponent() {
             Login
           </Button>
         </div>
+        <ErrorContainer showError={hasLoginFailed} message="Invalid username or password!"/>
       </Form>
-      <ErrorContainer showError={hasLoginFailed} message="Invalid username or password" />
-      <div className="mt-3">
+      <div className="mt-3 mb-4">
         Register a new Account <Link to={'/signup'}>here</Link> !
       </div>
     </div>
