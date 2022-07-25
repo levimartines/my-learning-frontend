@@ -12,7 +12,6 @@
 .base-component {
   display: flex;
   width: 640px;
-  padding: 8px 80px 0 80px;
   align-items: center;
   flex-direction: column;
   border: solid white 1px;

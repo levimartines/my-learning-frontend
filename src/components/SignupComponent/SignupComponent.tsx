@@ -1,8 +1,7 @@
 import { FormEvent, useRef, useState } from 'react';
-import classes from '../AuthComponent.module.css';
 import { Button, Form } from 'react-bootstrap';
-import ErrorContainer from '../../ErrorContainer/ErrorContainer';
-import AuthenticationService from '../../../services/AuthenticationService';
+import ErrorContainer from '../ErrorContainer/ErrorContainer';
+import AuthenticationService from '../../services/AuthenticationService';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
 
 function SignupComponent() {
@@ -81,7 +80,7 @@ function SignupComponent() {
             Please insert a valid password.
           </Form.Control.Feedback>
         </Form.Group>
-        <div className={classes.center}>
+        <div className="text-center justify-content-start">
           <Button variant="primary" type="submit">
             Sign Up
           </Button>
