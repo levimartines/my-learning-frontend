@@ -1,14 +1,13 @@
 import { Button, Form } from 'react-bootstrap';
-import React, { FormEvent, useRef, useState } from 'react';
+import React, { FormEvent, useContext, useRef, useState } from 'react';
 import { Task } from '../../models/task';
 import DateUtilsService from '../../services/DateUtilsService';
 import TaskService from '../../services/TaskService';
+import { TasksContext } from '../../store/tasks-context';
 
-interface IProps {
-  addTask: (task: Task) => void;
-}
+function CreateTaskComponent() {
+  const tasksCtx = useContext(TasksContext);
 
-function CreateTaskComponent({ addTask }: IProps) {
   const descriptionInputRef = useRef<HTMLInputElement>(null);
   const dueDateInputRef = useRef<HTMLInputElement>(null);
 
@@ -24,7 +23,7 @@ function CreateTaskComponent({ addTask }: IProps) {
     TaskService.save(task)
       .then(res => {
         setState(initialState);
-        addTask(res.data);
+        tasksCtx.addTask(res.data);
       })
       .catch(err => console.error('Error saving the Task', err));
   };

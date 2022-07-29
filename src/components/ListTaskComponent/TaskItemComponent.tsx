@@ -2,27 +2,28 @@ import { Task } from '../../models/task';
 import TaskService from '../../services/TaskService';
 import { FaCheck, FaTrash } from 'react-icons/fa';
 import { FiCheck, FiTrash } from 'react-icons/fi';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import { TasksContext } from '../../store/tasks-context';
 
 interface IProps {
   task: Task;
-  handleMarkTaskAsDone: (id: number) => void;
-  handleDelete: (id: number) => void;
 }
 
-function TaskItemComponent({ task, handleMarkTaskAsDone, handleDelete }: IProps) {
+function TaskItemComponent({ task }: IProps) {
+  const tasksCtx = useContext(TasksContext);
+
   const [isDoneIconHovering, setIsDoneIconHovering] = useState(false);
   const [isDeleteIconHovering, setIsDeleteIconHovering] = useState(false);
 
   const markAsDone = (id: number) => {
     TaskService.markAsDone(id)
-      .then(() => handleMarkTaskAsDone(id))
+      .then(() => tasksCtx.removeTask(id))
       .catch(err => console.error('Error finishing task ' + id, err));
   };
 
   const deleteTask = (id: number) => {
     TaskService.delete(id)
-      .then(() => handleDelete(id))
+      .then(() => tasksCtx.removeTask(id))
       .catch(err => console.error('Error finishing task ' + id, err));
   };
 

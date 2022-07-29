@@ -14,8 +14,8 @@
   width: 640px;
   align-items: center;
   flex-direction: column;
-  border: solid white 1px;
+  border: 1px solid #FFF;
   border-radius: 16px;
-  justify-content: start;
+  justify-content: flex-start;
 }
 

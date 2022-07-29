@@ -1,15 +1,13 @@
 import { Table } from 'react-bootstrap';
 import TaskItemComponent from './TaskItemComponent';
-import { Task } from '../../models/task';
+import { useContext } from 'react';
+import { TasksContext } from '../../store/tasks-context';
 
-interface IProps {
-  tasks: Task[];
-  markTaskAsDone: (id: number) => void;
-  handleDelete: (id: number) => void;
-}
 
-function TaskListComponent({ tasks, markTaskAsDone, handleDelete }: IProps) {
-  if (!tasks || tasks.length === 0) {
+function TaskListComponent() {
+  const tasksCtx = useContext(TasksContext);
+
+  if (!tasksCtx.tasks || tasksCtx.tasks.length === 0) {
     return (
       <div className="mt-3 mb-3 text-center">
         No tasks registered
@@ -28,7 +26,7 @@ function TaskListComponent({ tasks, markTaskAsDone, handleDelete }: IProps) {
       </tr>
       </thead>
       <tbody>
-      {tasks.map(task => <TaskItemComponent handleMarkTaskAsDone={markTaskAsDone} handleDelete={handleDelete} key={task.id} task={task}/>)}
+      {tasksCtx.tasks.map(task => <TaskItemComponent key={task.id} task={task}/>)}
       </tbody>
     </Table>
   );
