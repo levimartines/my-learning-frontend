@@ -25,11 +25,11 @@ class AuthenticationService {
 
   login(email: string, password: string) {
     const login = { email, password };
-    return axios.post(`${API_URL}login`, login);
+    return axios.post(`${API_URL}/login`, login);
   }
 
   signUp(user: User) {
-    return axios.post(`${API_URL}users`, user);
+    return axios.post(`${API_URL}/users`, user);
   }
 
   isUserLoggedIn() {

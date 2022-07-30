@@ -3,7 +3,7 @@ import { API_URL } from '../constants/env-constants';
 import { Task } from '../models/task';
 
 class TaskService {
-  TASK_URL = `${API_URL}tasks`;
+  TASK_URL = `${API_URL}/tasks`;
 
   findAll(): Promise<AxiosResponse<Task[]>> {
     return axios.get(this.TASK_URL);
