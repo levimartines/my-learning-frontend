@@ -17,7 +17,7 @@
     "@types/react": "^18.0.15",
     "@types/react-dom": "^18.0.6",
     "axios": "^0.27.2",
-    "bootstrap": "^5.1.3",
+    "bootstrap": "^5.2.0",
     "jwt-decode": "^3.1.2",
     "react": "^18.2.0",
     "react-bootstrap": "^2.4.0",
@@ -35,7 +35,9 @@
     "rules": {
       "testing-library/no-container": "off",
       "testing-library/no-node-access": "off",
-      "testing-library/no-unnecessary-act": "off"
+      "testing-library/no-unnecessary-act": "off",
+      "testing-library/prefer-screen-queries": "off",
+      "react-hooks/exhaustive-deps": "off"
     }
   },
   "browserslist": {
