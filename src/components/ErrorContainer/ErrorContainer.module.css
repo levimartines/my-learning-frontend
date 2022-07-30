@@ -1,7 +1,7 @@
 .errorContainer {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: red;
-  margin-top: 1rem !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: red;
+    margin-top: 1rem !important;
 }

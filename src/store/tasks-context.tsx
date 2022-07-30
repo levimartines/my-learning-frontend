@@ -1,5 +1,5 @@
-import { Task } from '../models/task';
 import React, { useState } from 'react';
+import { Task } from '../models/task';
 
 interface ITasksContext {
   tasks: Task[],
@@ -10,11 +10,11 @@ interface ITasksContext {
 
 export const TasksContext = React.createContext<ITasksContext>({
   tasks: [],
-  addTask: (t) => {
+  addTask: () => {
   },
-  removeTask: (n) => {
+  removeTask: () => {
   },
-  setTasks: (t) => {
+  setTasks: () => {
   },
 });
 
@@ -30,7 +30,7 @@ const TaskContextProvider: React.FC<any> = ({ children }) => {
   }
 
   function removeTaskHandler(id: number) {
-    setTasks(tasks.filter(t => t.id !== id));
+    setTasks(tasks.filter((t) => t.id !== id));
   }
 
   const ctx: ITasksContext = {

@@ -1,8 +1,7 @@
 import { Table } from 'react-bootstrap';
-import TaskItemComponent from './TaskItemComponent';
 import { useContext } from 'react';
+import TaskItemComponent from './TaskItemComponent';
 import { TasksContext } from '../../store/tasks-context';
-
 
 function TaskListComponent() {
   const tasksCtx = useContext(TasksContext);
@@ -26,7 +25,7 @@ function TaskListComponent() {
       </tr>
       </thead>
       <tbody>
-      {tasksCtx.tasks.map(task => <TaskItemComponent key={task.id} task={task}/>)}
+      {tasksCtx.tasks.map((task) => <TaskItemComponent key={task.id} task={task}/>)}
       </tbody>
     </Table>
   );

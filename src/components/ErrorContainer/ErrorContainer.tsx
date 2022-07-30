@@ -5,13 +5,14 @@ interface IProps {
   message: string;
 }
 
-function ErrorContainer({ showError, message}: IProps) {
-
+function ErrorContainer({ showError, message }: IProps) {
   return (
-    showError ?
-      <div className={classes.errorContainer}>
-        <strong>{message}</strong>
-      </div>
+    showError
+      ? (
+        <div className={classes.errorContainer}>
+          <strong>{message}</strong>
+        </div>
+      )
       : <></>
   );
 }

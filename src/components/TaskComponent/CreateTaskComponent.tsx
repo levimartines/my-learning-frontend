@@ -1,5 +1,7 @@
 import { Button, Form } from 'react-bootstrap';
-import React, { FormEvent, useContext, useRef, useState } from 'react';
+import React, {
+  FormEvent, useContext, useRef, useState,
+} from 'react';
 import { Task } from '../../models/task';
 import DateUtilsService from '../../services/DateUtilsService';
 import TaskService from '../../services/TaskService';
@@ -21,11 +23,11 @@ function CreateTaskComponent() {
       description: descriptionInputRef.current!.value,
     };
     TaskService.save(task)
-      .then(res => {
+      .then((res) => {
         setState(initialState);
         tasksCtx.addTask(res.data);
       })
-      .catch(err => console.error('Error saving the Task', err));
+      .catch((err) => console.error('Error saving the Task', err));
   };
 
   const onChangeDueDate = ({ target }: React.ChangeEvent<HTMLInputElement>) => {

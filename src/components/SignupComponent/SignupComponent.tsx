@@ -1,8 +1,8 @@
 import { FormEvent, useRef, useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import ErrorContainer from '../ErrorContainer/ErrorContainer';
 import AuthenticationService from '../../services/AuthenticationService';
-import { Link, Navigate, useNavigate } from 'react-router-dom';
 
 function SignupComponent() {
   const navigate = useNavigate();
@@ -28,12 +28,11 @@ function SignupComponent() {
   function createUserAndLogIn(email: string, password: string) {
     AuthenticationService.signUp({ email, password })
       .then(() => {
-        AuthenticationService.login(email, password).then(res => {
-          AuthenticationService.registerSuccessfulLogin(email, res.headers['authorization']);
-          navigate(`/`);
-        }).catch(err => console.error('Error during Log in', err));
-      }).catch(err => console.error('Error during User creation', err));
-
+        AuthenticationService.login(email, password).then((res) => {
+          AuthenticationService.registerSuccessfulLogin(email, res.headers.authorization);
+          navigate('/');
+        }).catch((err) => console.error('Error during Log in', err));
+      }).catch((err) => console.error('Error during User creation', err));
   }
 
   if (AuthenticationService.isUserLoggedIn()) {
@@ -88,7 +87,11 @@ function SignupComponent() {
         <ErrorContainer showError={passwordsNotMatch} message="Passwords fields do not match"/>
       </Form>
       <div className="mt-3 mb-4">
-        Login <Link to={'/login'}>here</Link> !
+        Login
+        {' '}
+        <Link to="/login">here</Link>
+        {' '}
+        !
       </div>
     </div>
   );

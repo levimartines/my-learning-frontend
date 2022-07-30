@@ -1,7 +1,7 @@
 import { FormEvent, useRef, useState } from 'react';
-import AuthenticationService from '../../services/AuthenticationService';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { Button, Form } from 'react-bootstrap';
+import AuthenticationService from '../../services/AuthenticationService';
 import ErrorContainer from '../ErrorContainer/ErrorContainer';
 
 function LoginComponent() {
@@ -15,11 +15,11 @@ function LoginComponent() {
     event.preventDefault();
     const email = emailInputRef.current!.value;
     const password = passwordInputRef.current!.value;
-    AuthenticationService.login(email, password).then(res => {
+    AuthenticationService.login(email, password).then((res) => {
       const token = res.headers.authorization;
       AuthenticationService.registerSuccessfulLogin(email, token);
-      navigate(`/dashboard`);
-    }).catch(err => {
+      navigate('/dashboard');
+    }).catch((err) => {
       AuthenticationService.deleteTokens();
       console.error('Error during Log in', err);
       setHasLoginFailed(true);
@@ -31,7 +31,7 @@ function LoginComponent() {
   }
 
   return (
-    <div className='base-component'>
+    <div className="base-component">
       <Form onSubmit={handleSubmit}>
         <Form.Group className="mb-3 mt-3" controlId="formEmail">
           <Form.Label>Email: </Form.Label>
@@ -67,7 +67,11 @@ function LoginComponent() {
         <ErrorContainer showError={hasLoginFailed} message="Invalid username or password!"/>
       </Form>
       <div className="mt-3 mb-4">
-        Register a new Account <Link to={'/signup'}>here</Link> !
+        Register a new Account
+        {' '}
+        <Link to="/signup">here</Link>
+        {' '}
+        !
       </div>
     </div>
   );

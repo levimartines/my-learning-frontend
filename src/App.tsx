@@ -5,9 +5,10 @@ import LoginComponent from './components/LoginComponent/LoginComponent';
 import DashboardComponent from './components/DashboardComponent/DashboardComponent';
 import SignupComponent from './components/SignupComponent/SignupComponent';
 import AuthenticatedRoute from './components/AuthenticatedRoute/AuthenticatedRoute';
-import TaskComponent from './components/ListTaskComponent/TaskComponent';
+import TaskComponent from './components/TaskComponent/TaskComponent';
 import TestComponent from './components/TestComponent/TestComponent';
 import AuthenticationService from './services/AuthenticationService';
+import TaskContextProvider from './store/tasks-context';
 
 function App() {
   if (AuthenticationService.isUserLoggedIn()) {
@@ -19,7 +20,8 @@ function App() {
         <Route path="/" element={<AuthenticatedRoute element={<DashboardComponent/>}/>}/>
         <Route path="login" element={<LoginComponent/>}/>
         <Route path="signup" element={<SignupComponent/>}/>
-        <Route path="task" element={<AuthenticatedRoute element={<TaskComponent/>}/>}/>
+        <Route path="task"
+               element={<AuthenticatedRoute element={<TaskContextProvider><TaskComponent/></TaskContextProvider>}/>}/>
         <Route path="test" element={<AuthenticatedRoute element={<TestComponent/>}/>}/>
         <Route path="*" element={<Navigate to="/" replace/>}/>
       </Routes>

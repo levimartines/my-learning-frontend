@@ -13,7 +13,6 @@ interface IToken {
 }
 
 class AuthenticationService {
-
   registerSuccessfulLogin(email: string, token: string) {
     if (email && token) {
       localStorage.setItem(LOGIN_SESSION, email);
@@ -25,12 +24,12 @@ class AuthenticationService {
   }
 
   login(email: string, password: string) {
-    let login = { email, password };
-    return axios.post(API_URL + 'login', login);
+    const login = { email, password };
+    return axios.post(`${API_URL}login`, login);
   }
 
   signUp(user: User) {
-    return axios.post(API_URL + 'users', user);
+    return axios.post(`${API_URL}users`, user);
   }
 
   isUserLoggedIn() {
@@ -46,7 +45,7 @@ class AuthenticationService {
 
   setupAxiosInterceptors() {
     axios.interceptors.request.use((config: AxiosRequestConfig<{ header: any }>) => {
-      let token = localStorage.getItem(TOKEN);
+      const token = localStorage.getItem(TOKEN);
       if (this.isUserLoggedIn() && token && config.headers) {
         config.headers.Authorization = token;
       }
@@ -57,7 +56,6 @@ class AuthenticationService {
   deleteTokens() {
     localStorage.clear();
   }
-
 }
 
 export default new AuthenticationService();

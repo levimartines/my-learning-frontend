@@ -1,10 +1,9 @@
-import { API_URL } from '../constants/env-constants';
 import axios, { AxiosResponse } from 'axios';
+import { API_URL } from '../constants/env-constants';
 import { Task } from '../models/task';
 
 class TaskService {
-
-  TASK_URL = API_URL + 'tasks';
+  TASK_URL = `${API_URL}tasks`;
 
   findAll(): Promise<AxiosResponse<Task[]>> {
     return axios.get(this.TASK_URL);
@@ -15,11 +14,11 @@ class TaskService {
   }
 
   markAsDone(id: number) {
-    return axios.put(this.TASK_URL + `/done/${id}`);
+    return axios.put(`${this.TASK_URL}/done/${id}`);
   }
 
   delete(id: number) {
-    return axios.delete(this.TASK_URL + `/${id}`);
+    return axios.delete(`${this.TASK_URL}/${id}`);
   }
 }
 
