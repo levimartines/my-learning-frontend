@@ -3,7 +3,7 @@ import { useContext } from 'react';
 import TaskItemComponent from './TaskItemComponent';
 import { TasksContext } from '../../store/tasks-context';
 
-function TaskListComponent() {
+function ListTaskComponent() {
   const tasksCtx = useContext(TasksContext);
 
   if (!tasksCtx.tasks || tasksCtx.tasks.length === 0) {
@@ -31,4 +31,4 @@ function TaskListComponent() {
   );
 }
 
-export default TaskListComponent;
+export default ListTaskComponent;
