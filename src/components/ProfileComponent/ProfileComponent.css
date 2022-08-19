@@ -1,0 +1,14 @@
+.accordion-item {
+    color: white !important;
+    background-color: #343a40 !important;
+    border: var(--bs-accordion-border-width) solid #343a40 !important;
+}
+.accordion-button {
+    background-color: #343a40 !important;
+    color: white !important;
+    width: 604px !important;
+}
+
+.accordion-button:not(.collapsed)::after {
+    background-image: var(--bs-accordion-btn-icon) !important;
+}
