@@ -1,5 +1,5 @@
 import { useContext, useEffect } from 'react';
-import NavBar from '../NavBar/NavBar';
+import NavBarComponent from '../NavBarComponent/NavBarComponent';
 import TaskService from '../../services/TaskService';
 import CreateTaskComponent from './CreateTaskComponent';
 import ListTaskComponent from './ListTaskComponent';
@@ -16,7 +16,7 @@ export default function TaskComponent() {
 
   return (
     <div className="base-component">
-      <NavBar/>
+      <NavBarComponent/>
       <CreateTaskComponent/>
 
       <div className="mt-3 mb-4 w-75">

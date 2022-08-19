@@ -23,9 +23,10 @@ class AuthenticationService {
     }
   }
 
-  login(email: string, password: string) {
+  login(email: string, password: string, mfaCode?: string) {
     const login = { email, password };
-    return axios.post(`${API_URL}/login`, login);
+    const params = mfaCode !== '' ? { mfaCode } : {};
+    return axios.post(`${API_URL}/login`, login, { params });
   }
 
   signUp(user: User) {

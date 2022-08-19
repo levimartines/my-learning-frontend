@@ -8,18 +8,28 @@ function LoginComponent() {
   const navigate = useNavigate();
   const emailInputRef = useRef<HTMLInputElement>(null);
   const passwordInputRef = useRef<HTMLInputElement>(null);
-
+  const mfaCodeInputRef = useRef<HTMLInputElement>(null);
+  const [useMFA, setUseMFA] = useState(false);
   const [hasLoginFailed, setHasLoginFailed] = useState(false);
+
+  const resetForm = () => {
+    emailInputRef.current!.value = '';
+    passwordInputRef.current!.value = '';
+    if (useMFA) mfaCodeInputRef.current!.value = '';
+  }
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
     const email = emailInputRef.current!.value;
     const password = passwordInputRef.current!.value;
-    AuthenticationService.login(email, password).then((res) => {
+    let mfaCode;
+    if (useMFA) mfaCode = mfaCodeInputRef.current!.value;
+    AuthenticationService.login(email, password, mfaCode).then((res) => {
       const token = res.headers.authorization;
       AuthenticationService.registerSuccessfulLogin(email, token);
       navigate('/dashboard');
     }).catch((err) => {
+      resetForm();
       AuthenticationService.deleteTokens();
       console.error('Error during Log in', err);
       setHasLoginFailed(true);
@@ -59,19 +69,42 @@ function LoginComponent() {
             Please insert a valid password.
           </Form.Control.Feedback>
         </Form.Group>
+
+        <Form.Group className="mb-4" controlId="formMFAActive">
+          <Form.Check
+            type="checkbox"
+            id="mfaActive"
+            label="Use MFA"
+            onChange={v => setUseMFA(v.target.checked)}
+          />
+          {useMFA && <>
+              <Form.Label>6 digits codes:</Form.Label>
+              <Form.Control
+                  type="number"
+                  name="mfaCode"
+                  maxLength={6}
+                  ref={mfaCodeInputRef}
+              />
+          </>
+          }
+        </Form.Group>
+
+        <Form.Group className="mb-4" controlId="formMFACode">
+
+        </Form.Group>
         <div className="text-center justify-content-start">
           <Button variant="primary" type="submit">
             Login
           </Button>
         </div>
+
         <ErrorContainer showError={hasLoginFailed} message="Invalid username or password!"/>
       </Form>
       <div className="mt-3 mb-4">
         Register a new Account
         {' '}
         <Link to="/signup">here</Link>
-        {' '}
-        !
+        {' !'}
       </div>
     </div>
   );

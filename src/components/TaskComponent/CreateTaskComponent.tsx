@@ -3,7 +3,7 @@ import React, {
   FormEvent, useContext, useRef, useState,
 } from 'react';
 import { Task } from '../../models/task';
-import DateUtilsService from '../../services/DateUtilsService';
+import { toFormattedDate } from '../../utils/DateUtils';
 import TaskService from '../../services/TaskService';
 import { TasksContext } from '../../store/tasks-context';
 
@@ -13,7 +13,7 @@ function CreateTaskComponent() {
   const descriptionInputRef = useRef<HTMLInputElement>(null);
   const dueDateInputRef = useRef<HTMLInputElement>(null);
 
-  const initialState = { description: '', dueDate: DateUtilsService.toFormattedDate(new Date()) };
+  const initialState = { description: '', dueDate: toFormattedDate(new Date()) };
   const [state, setState] = useState<Task>(initialState);
 
   const handleSubmit = (event: FormEvent) => {
@@ -33,7 +33,7 @@ function CreateTaskComponent() {
   const onChangeDueDate = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
     setState({
       ...state,
-      dueDate: DateUtilsService.toFormattedDate(new Date(target.value)),
+      dueDate: toFormattedDate(new Date(target.value)),
     });
   };
 
