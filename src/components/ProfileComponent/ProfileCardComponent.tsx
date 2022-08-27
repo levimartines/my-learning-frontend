@@ -20,10 +20,12 @@ const ProfileCardComponent = ({ user }: IProps) => {
   const fetchProfilePicture = () => {
     PrincipalService.getProfilePicture()
       .then((res) => {
-        const base64 = 'data:image/jpg;base64,' + res.data;
-        setImg(base64);
+        if (res.data) {
+          const base64 = 'data:image/jpg;base64,' + res.data;
+          setImg(base64);
+        }
       })
-      .catch();
+      .catch(e => console.error('Error retrieving user picture', e));
   };
 
   const handleSubmit = (event: FormEvent) => {
