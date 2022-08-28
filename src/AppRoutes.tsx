@@ -1,13 +1,14 @@
+import React from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
+import TaskContextProvider from './store/tasks-context';
 import AuthenticatedRoute from './components/AuthenticatedRoute/AuthenticatedRoute';
+import ConfirmRegistrationComponent from './components/ConfirmRegistrationComponent/ConfirmRegistrationComponent';
 import DashboardComponent from './components/DashboardComponent/DashboardComponent';
 import LoginComponent from './components/LoginComponent/LoginComponent';
+import ProfileComponent from './components/ProfileComponent/ProfileComponent';
 import SignupComponent from './components/SignupComponent/SignupComponent';
-import TaskContextProvider from './store/tasks-context';
 import TaskComponent from './components/TaskComponent/TaskComponent';
 import TestComponent from './components/TestComponent/TestComponent';
-import React from 'react';
-import ProfileComponent from './components/ProfileComponent/ProfileComponent';
 
 function AppRoutes() {
   return (
@@ -15,6 +16,7 @@ function AppRoutes() {
       <Route path="/" element={<AuthenticatedRoute element={<DashboardComponent/>}/>}/>
       <Route path="login" element={<LoginComponent/>}/>
       <Route path="signup" element={<SignupComponent/>}/>
+      <Route path="confirm-registration" element={<ConfirmRegistrationComponent/>}/>
       <Route path="task"
              element={<AuthenticatedRoute element={<TaskContextProvider><TaskComponent/></TaskContextProvider>}/>}/>
       <Route path="test" element={<AuthenticatedRoute element={<TestComponent/>}/>}/>
